@@ -32,8 +32,12 @@ set ::env(VERILOG_FILES) "\
 ## Clock configurations
 set ::env(CLOCK_PORT) "user_clock2"
 set ::env(CLOCK_NET) "mprj.clk"
+# set ::env(VDD_NETS) "VDD"
+# set ::env(GND_NETS) "VSS"
 
-set ::env(CLOCK_PERIOD) "10"
+set ::env(CLOCK_PERIOD) "20"
+set ::env(RUN_KLAYOUT_XOR) 0 
+# set ::env(MAGIC_EXT_USE_GDS) 1
 
 ## Internal Macros
 ### Macro Placement
@@ -45,10 +49,10 @@ set ::env(VERILOG_FILES_BLACKBOX) "\
 	$script_dir/../../verilog/rtl/user_proj_example.v"
 
 set ::env(EXTRA_LEFS) "\
-	$script_dir/../../lef/user_proj_example.lef"
+	$script_dir/../../lef/design.lef"
 
 set ::env(EXTRA_GDS_FILES) "\
-	$script_dir/../../gds/user_proj_example.gds"
+	$script_dir/../../gds/design_merged.gds"
 
 set ::env(GLB_RT_MAXLAYER) 5
 
@@ -67,3 +71,8 @@ set ::env(DIODE_INSERTION_STRATEGY) 0
 set ::env(FILL_INSERTION) 0
 set ::env(TAP_DECAP_INSERTION) 0
 set ::env(CLOCK_TREE_SYNTH) 0
+
+# Custom PDN script
+set ::env(PDN_CFG) $script_dir/pdn.tcl
+set ::env(VDD_PIN) "VDD"
+set ::env(GND_PIN) "VSS"
