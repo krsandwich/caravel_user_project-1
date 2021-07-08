@@ -1,11 +1,11 @@
 # Power nets
 
 if { ! [info exists ::env(VDD_NET)] } {
-	set ::env(VDD_NET) $::env(VDD_PIN)
+    set ::env(VDD_NET) $::env(VDD_PIN)
 }
 
 if { ! [info exists ::env(GND_NET)] } {
-	set ::env(GND_NET) $::env(GND_PIN)
+    set ::env(GND_NET) $::env(GND_PIN)
 }
 
 set ::power_nets $::env(VDD_NET)
@@ -31,8 +31,8 @@ if { [info exists ::env(FP_PDN_ENABLE_GLOBAL_CONNECTIONS)] } {
 set stdcell_core {
     name grid
     straps {
-	    $::env(FP_PDN_LOWER_LAYER) {width $::env(FP_PDN_VWIDTH) pitch $::env(FP_PDN_VPITCH) offset $::env(FP_PDN_VOFFSET)}
-	    $::env(FP_PDN_UPPER_LAYER) {width $::env(FP_PDN_HWIDTH) pitch $::env(FP_PDN_HPITCH) offset $::env(FP_PDN_HOFFSET)}
+        $::env(FP_PDN_LOWER_LAYER) {width $::env(FP_PDN_VWIDTH) pitch $::env(FP_PDN_VPITCH) offset $::env(FP_PDN_VOFFSET)}
+        $::env(FP_PDN_UPPER_LAYER) {width $::env(FP_PDN_HWIDTH) pitch $::env(FP_PDN_HPITCH) offset $::env(FP_PDN_HOFFSET)}
     }
     connect {{$::env(FP_PDN_LOWER_LAYER) $::env(FP_PDN_UPPER_LAYER)}}
 }
@@ -41,7 +41,7 @@ set stdcell_core {
 set stdcell_macro {
     name grid
     straps {
-	    $::env(FP_PDN_LOWER_LAYER) {width $::env(FP_PDN_VWIDTH) pitch $::env(FP_PDN_VPITCH) offset $::env(FP_PDN_VOFFSET)}
+        $::env(FP_PDN_LOWER_LAYER) {width $::env(FP_PDN_VWIDTH) pitch $::env(FP_PDN_VPITCH) offset $::env(FP_PDN_VOFFSET)}
     }
     connect {}
 }
@@ -70,15 +70,15 @@ if { [info exists ::env(FP_PDN_CORE_RING)] } {
 # Adds the core ring if enabled.
 if { [info exists ::env(FP_PDN_ENABLE_RAILS)] } {
     if { $::env(FP_PDN_ENABLE_RAILS) == 1 } {
-		dict append stdcell rails {
-			$::env(FP_PDN_RAILS_LAYER) {width $::env(FP_PDN_RAIL_WIDTH) pitch $::env(PLACE_SITE_HEIGHT) offset $::env(FP_PDN_RAIL_OFFSET)}
-		}
-		dict update stdcell connect current_connect {
-			append current_connect { {$::env(FP_PDN_RAILS_LAYER) $::env(FP_PDN_LOWER_LAYER)}}
-		}
+        dict append stdcell rails {
+            $::env(FP_PDN_RAILS_LAYER) {width $::env(FP_PDN_RAIL_WIDTH) pitch $::env(PLACE_SITE_HEIGHT) offset $::env(FP_PDN_RAIL_OFFSET)}
+        }
+        dict update stdcell connect current_connect {
+            append current_connect { {$::env(FP_PDN_RAILS_LAYER) $::env(FP_PDN_LOWER_LAYER)}}
+        }
     } else {
-		dict append stdcell rails {}
-	}
+        dict append stdcell rails {}
+    }
 }
 
 pdngen::specify_grid stdcell [subst $stdcell]
